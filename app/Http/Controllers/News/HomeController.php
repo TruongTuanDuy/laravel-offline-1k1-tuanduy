@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\News;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;;    
+use Illuminate\Http\Request;
 
 use App\Models\SliderModel;
 use App\Models\ArticleModel;
@@ -21,7 +22,7 @@ class HomeController extends Controller
     }
 
     public function index(Request $request)
-    {   
+    {
         $sliderModel   = new SliderModel();
         $categoryModel = new CategoryModel();
         $articleModel  = new ArticleModel();
@@ -33,7 +34,7 @@ class HomeController extends Controller
 
         foreach ($itemsCategory as $key => $category)
             $itemsCategory[$key]['articles'] = $articleModel->listItems(['category_id' => $category['id']], ['task' => 'news-list-items-in-category']);
-            
+
         return view($this->pathViewController .  'index', [
             'params'        => $this->params,
             'itemsSlider'   => $itemsSlider,
@@ -43,5 +44,10 @@ class HomeController extends Controller
         ]);
     }
 
- 
+    public function notFound(Request $request)
+    {
+        return view($this->pathViewController .  'not-found', [
+            'params'        => $this->params,
+        ]);
+    }
 }
