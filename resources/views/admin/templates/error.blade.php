@@ -5,4 +5,7 @@
             <p>{{ $error }}</p>
         @endforeach
     </div>
+    {{-- @php
+        Session::flush('errors');
+    @endphp --}}
 @endif

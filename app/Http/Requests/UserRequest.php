@@ -35,7 +35,6 @@ class UserRequest extends FormRequest
         $condStatus   = '';
         $condFullname = '';
 
-       
         switch ($task) {
             case 'add':
                 $condUserName   = "bail|required|between:5,100|unique:$this->table,username";
@@ -47,14 +46,14 @@ class UserRequest extends FormRequest
                 $condAvatar     = 'bail|required|image|max:500';
                 break;
             case 'edit-info':
-                $condUserName   = "bail|required|between:5,100|unique:$this->table,username,$id"; 
+                $condUserName   = "bail|required|between:5,100|unique:$this->table,username,$id";
                 $condFullname   = 'bail|required|min: 5';
                 $condAvatar     = 'bail|image|max:500';
                 $condStatus     = 'bail|in:active,inactive';
                 $condEmail      = "bail|required|email|unique:$this->table,email,$id";
                 break;
             case 'change-password':
-                $condPass = 'bail|required|between:5,100|confirmed';
+                $condPass = "bail|sometimes|required|between:5,100|confirmed";
                 break;
             case 'change-level':
                 $condLevel = 'bail|in:admin,member';
@@ -62,14 +61,13 @@ class UserRequest extends FormRequest
             default:
                 break;
         }
-        
 
         return [
             'username' => $condUserName,
             'email'    => $condEmail,
             'fullname' => $condFullname,
             'status'   => $condStatus,
-            'password' => $condPass,
+            'new_password' => $condPass,
             'level'    => $condLevel,
             'avatar'   => $condAvatar
         ];

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Rules\Oldpassword;
 use App\Models\UserModel as MainModel;
 use App\Http\Requests\UserRequest as MainRequest;
+use Illuminate\Database\Eloquent\Model;
 
 class UserController extends Controller
 {
@@ -84,6 +86,10 @@ class UserController extends Controller
     {
         if ($request->method() == 'POST') {
             $params = $request->all();
+            // $emptyErrors = new MessageBag();
+            // session()->put('errors', $emptyErrors);
+            // $request->resetErrorBag();
+            // $request->resetValidation();
             $this->model->saveItem($params, ['task' => 'change-level-post']);
             return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi level thành công!");
         }
@@ -93,6 +99,13 @@ class UserController extends Controller
     {
         if ($request->method() == 'POST') {
             $params = $request->all();
+            $item = null;
+            $item = $this->model->getItem($params, ['task' => 'get-item']);
+
+            $request->validate([
+                'current_password' => ['required', new OldPassword($item['password'])],
+            ]);
+
             $this->model->saveItem($params, ['task' => 'change-password']);
             return redirect()->route($this->controllerName)->with("zvn_notify", "Thay đổi mật khẩu thành công!");
         }
