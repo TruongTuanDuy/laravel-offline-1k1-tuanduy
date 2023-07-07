@@ -95,6 +95,16 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function category(Request $request)
+    {
+        $params["currentCategory"]      = $request->category_id;
+        $params["id"]                   = $request->id;
+        $this->model->saveItem($params, ['task' => 'change-category']);
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
     public function delete(Request $request)
     {
         $params["id"]             = $request->id;

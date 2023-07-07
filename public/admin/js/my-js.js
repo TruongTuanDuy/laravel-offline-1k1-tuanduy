@@ -5,6 +5,7 @@ $(document).ready(function () {
     let $inputSearchField = $("input[name  = search_field]");
     let $inputSearchValue = $("input[name  = search_value]");
     let $selectChangeAttr = $("select[name = select_change_attr]");
+    let $selectChangeCategory = $("select[name = select_change_category]");
 
     $("a.select-field").click(function (e) {
         e.preventDefault();
@@ -112,6 +113,24 @@ $(document).ready(function () {
     });
 
     $selectChangeAttr.on("change", function () {
+        let ele = $(this);
+        let selectValue = $(this).val();
+        let url = $(this).data("url");
+        url = url.replace("value_new", selectValue);
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (response) {
+                ele.notify("Cập nhật thành công", {
+                    position: "top center",
+                    className: "success",
+                });
+            },
+        });
+    });
+
+    $selectChangeCategory.on("change", function () {
         let ele = $(this);
         let selectValue = $(this).val();
         let url = $(this).data("url");

@@ -19,13 +19,11 @@ class ArticleModel extends AdminModel
 
     public function listItems($params = null, $options = null)
     {
-
         $result = null;
 
         if ($options['task'] == "admin-list-items") {
-            $query = $this->select('a.id', 'a.name', 'a.status', 'a.content', 'a.thumb', 'a.type', 'c.name as category_name')
+            $query = $this->select('a.id', 'a.name', 'a.status', 'a.content', 'a.thumb', 'a.type', 'c.name as category_name', 'category_id')
                 ->leftJoin('category as c', 'a.category_id', '=', 'c.id');
-
 
             if ($params['filter']['status'] !== "all") {
                 $query->where('a.status', '=', $params['filter']['status']);
@@ -95,8 +93,6 @@ class ArticleModel extends AdminModel
             $result = $query->get()->toArray();
         }
 
-
-
         return $result;
     }
 
@@ -163,6 +159,9 @@ class ArticleModel extends AdminModel
             self::where('id', $params['id'])->update(['type' => $params['currentType']]);
         }
 
+        if ($options['task'] == 'change-category') {
+            self::where('id', $params['id'])->update(['category_id' => $params['currentCategory']]);
+        }
 
         if ($options['task'] == 'add-item') {
             $params['created_by'] = "hailan";

@@ -22,22 +22,23 @@
                 @if (count($items) > 0)
                     @foreach ($items as $key => $val)
                         @php
-                            $index           = $key + 1;
-                            $class           = ($index % 2 == 0) ? "even" : "odd";
-                            $id              = $val['id'];
-                            $name            = Hightlight::show($val['name'], $params['search'], 'name');
-                            $content         = Hightlight::show($val['content'], $params['search'], 'content');
-                            $thumb           = Template::showItemThumb($controllerName, $val['thumb'], $val['name']);
-                            $categoryName    = $val['category_name'];
-                            $status          = Template::showItemStatus($controllerName, $id, $val['status']); 
-                            $type            = Template::showItemSelect($controllerName, $id, $val['type'], 'type');
+                            $index = $key + 1;
+                            $class = $index % 2 == 0 ? 'even' : 'odd';
+                            $id = $val['id'];
+                            $name = Hightlight::show($val['name'], $params['search'], 'name');
+                            $content = Hightlight::show($val['content'], $params['search'], 'content');
+                            $thumb = Template::showItemThumb($controllerName, $val['thumb'], $val['name']);
+                            $status = Template::showItemStatus($controllerName, $id, $val['status']);
+                            // $categoryName    = $val['category_name'];
+                            $categoryName = Template::showItemCategory($controllerName, $id, $val['category_id'], 'category_id');
+                            $type = Template::showItemSelect($controllerName, $id, $val['type'], 'type');
                             // $createdHistory  = Template::showItemHistory($val['created_by'], $val['created']);
                             // $modifiedHistory = Template::showItemHistory($val['modified_by'], $val['modified']);
-                            $listBtnAction   = Template::showButtonAction($controllerName, $id);
+                            $listBtnAction = Template::showButtonAction($controllerName, $id);
                         @endphp
 
                         <tr class="{{ $class }} pointer">
-                            <td >{{ $index }}</td>
+                            <td>{{ $index }}</td>
                             <td width="30%">
                                 <p><strong>Name:</strong> {!! $name !!}</p>
                                 <p><strong>Content:</strong> {!! $content !!}</p>
@@ -45,8 +46,8 @@
                             <td width="14%">
                                 <p>{!! $thumb !!}</p>
                             </td>
-                            <td >{!! $categoryName !!}</td>
-                            <td>{!! $type   !!}</td>
+                            <td>{!! $categoryName !!}</td>
+                            <td>{!! $type !!}</td>
                             <td>{!! $status !!}</td>
                             {{-- <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td> --}}
@@ -60,4 +61,3 @@
         </table>
     </div>
 </div>
-           
