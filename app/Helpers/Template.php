@@ -5,7 +5,6 @@ namespace App\Helpers;
 use Config;
 use App\Models\CategoryModel;
 
-
 class Template
 {
     public static function showButtonFilter($controllerName, $itemsStatusCount, $currentFilterStatus, $paramsSearch)
@@ -26,6 +25,10 @@ class Template
                 $currentTemplateStatus = $tmplStatus[$statusValue]; // $value['status'] inactive block active
                 $link = route($controllerName) . "?filter_status=" .  $statusValue;
 
+                // if ($paramsFilterCategory !== '') {
+                //     $link .= "&filter_category=" . $paramsFilterCategory;
+                // }
+
                 if ($paramsSearch['value'] !== '') {
                     $link .= "&search_field=" . $paramsSearch['field'] . "&search_value=" .  $paramsSearch['value'];
                 }
@@ -37,6 +40,37 @@ class Template
             }
         }
 
+        return $xhtml;
+    }
+
+    public static function showFilterCategory($controllerName, $paramsFilter)
+    {
+        $xhtml = null;
+        $categoryModel  = new CategoryModel();
+        $itemsCategory  = $categoryModel->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
+        $itemsCategory['default'] = "- All Category -";
+        sort($itemsCategory);
+
+        $paramsFilter = in_array($paramsFilter, $itemsCategory) ? $paramsFilter : '- All Category -';
+
+        $xhtmlField = null;
+        foreach ($itemsCategory as $key => $value) {
+            $link = route($controllerName) . "?filter_category=" .  $value;
+            $xhtmlField .= sprintf('<li><a href="%s" class="select-field-category" data-field="%s">%s</a></li>', $link, $key, $value);
+        }
+
+        $xhtml = sprintf('
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle btn-active-field-category" data-toggle="dropdown" aria-expanded="false">
+                        %s <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        %s
+                    </ul>
+                </div>
+                <input type="hidden" name="filter_field" value="%s">
+            </div>', $paramsFilter, $xhtmlField, $paramsFilter);
         return $xhtml;
     }
 
@@ -137,7 +171,7 @@ class Template
         return $xhtml;
     }
 
-    public static function showItemCategory($controllerName, $id, $displayValue, $fieldName)
+    public static function showItemSelectCategory($controllerName, $id, $displayValue, $fieldName)
     {
         $link = route($controllerName . '/' . $fieldName, [$fieldName => 'value_new', 'id' => $id]);
 

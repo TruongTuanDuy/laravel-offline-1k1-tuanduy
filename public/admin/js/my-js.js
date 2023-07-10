@@ -2,10 +2,42 @@ $(document).ready(function () {
     let $btnSearch = $("button#btn-search");
     let $btnClearSearch = $("button#btn-clear-search");
 
+    let $inputFilterField = $("input[name  = filter_field]");
     let $inputSearchField = $("input[name  = search_field]");
     let $inputSearchValue = $("input[name  = search_value]");
     let $selectChangeAttr = $("select[name = select_change_attr]");
     let $selectChangeCategory = $("select[name = select_change_category]");
+
+    $("a.select-field-category").click(function (e) {
+        e.preventDefault();
+
+        let field = $(this).data("field");
+        let fieldName = $(this).html();
+        $("button.btn-active-field-category").html(
+            fieldName + ' <span class="caret"></span>'
+        );
+        $inputFilterField.val(fieldName);
+
+        var pathname = window.location.pathname;
+        let params = ["filter_status"];
+        let searchParams = new URLSearchParams(window.location.search); // ?filter_status=active
+
+        let link = "";
+        $.each(params, function (key, param) {
+            // filter_status
+            if (searchParams.has(param)) {
+                link += param + "=" + searchParams.get(param) + "&"; // filter_status=active
+            }
+        });
+
+        let filter_field = $inputFilterField.val();
+        window.location.href =
+            pathname +
+            "?" +
+            link +
+            "filter_category=" +
+            filter_field;
+    });
 
     $("a.select-field").click(function (e) {
         e.preventDefault();
@@ -20,7 +52,7 @@ $(document).ready(function () {
 
     $btnSearch.click(function () {
         var pathname = window.location.pathname;
-        let params = ["filter_status"];
+        let params = ["filter_status", "filter_category"];
         let searchParams = new URLSearchParams(window.location.search); // ?filter_status=active
 
         let link = "";
@@ -52,7 +84,7 @@ $(document).ready(function () {
         var pathname = window.location.pathname;
         let searchParams = new URLSearchParams(window.location.search);
 
-        params = ["filter_status"];
+        params = ["filter_status", "filter_category"];
 
         let link = "";
         $.each(params, function (key, param) {

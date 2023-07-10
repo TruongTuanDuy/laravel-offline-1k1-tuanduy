@@ -29,6 +29,10 @@ class ArticleModel extends AdminModel
                 $query->where('a.status', '=', $params['filter']['status']);
             }
 
+            if ($params['filter']['category'] !== "- All Category -") {
+                $query->where('c.name', '=', $params['filter']['category']);
+            }
+
             if ($params['search']['value'] !== "") {
                 if ($params['search']['field'] == "all") {
                     $query->where(function ($query) use ($params) {
@@ -98,13 +102,18 @@ class ArticleModel extends AdminModel
 
     public function countItems($params = null, $options  = null)
     {
-
         $result = null;
 
         if ($options['task'] == 'admin-count-items-group-by-status') {
 
             $query = $this::groupBy('status')
                 ->select(DB::raw('status , COUNT(id) as count'));
+
+            // if ($params['filter']['category'] !== "") {
+            //     if ($params['filter']['category'] !== "- All Category -") {
+            //         $query->where('c.name', '=', $params['filter']['category']);
+            //     }
+            // }
 
             if ($params['search']['value'] !== "") {
                 if ($params['search']['field'] == "all") {

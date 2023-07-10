@@ -30,7 +30,7 @@
                             $thumb = Template::showItemThumb($controllerName, $val['thumb'], $val['name']);
                             $status = Template::showItemStatus($controllerName, $id, $val['status']);
                             // $categoryName    = $val['category_name'];
-                            $categoryName = Template::showItemCategory($controllerName, $id, $val['category_id'], 'category_id');
+                            $categoryName = Template::showItemSelectCategory($controllerName, $id, $val['category_id'], 'category_id');
                             $type = Template::showItemSelect($controllerName, $id, $val['type'], 'type');
                             // $createdHistory  = Template::showItemHistory($val['created_by'], $val['created']);
                             // $modifiedHistory = Template::showItemHistory($val['modified_by'], $val['modified']);

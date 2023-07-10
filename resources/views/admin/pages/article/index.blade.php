@@ -2,11 +2,12 @@
 @php
     use App\Helpers\Template as Template;
     $xhtmlButtonFilter = Template::showButtonFilter($controllerName, $itemsStatusCount, $params['filter']['status'], $params['search']);
-    $xhtmlAreaSeach    = Template::showAreaSearch($controllerName, $params['search']);
+    $xhtmlFilterCategory = Template::showFilterCategory($controllerName, $params['filter']['category']);
+    
+    $xhtmlAreaSeach = Template::showAreaSearch($controllerName, $params['search']);
 @endphp
 
 @section('content')
-    
     @include ('admin.templates.page_header', ['pageIndex' => true])
     @include ('admin.templates.zvn_notify')
 
@@ -16,7 +17,8 @@
                 @include('admin.templates.x_title', ['title' => 'Bộ lọc'])
                 <div class="x_content">
                     <div class="row">
-                        <div class="col-md-7">{!! $xhtmlButtonFilter !!}</div>
+                        <div class="col-md-5">{!! $xhtmlButtonFilter !!}</div>
+                        <div class="col-md-2">{!! $xhtmlFilterCategory !!}</div>
                         <div class="col-md-5">{!! $xhtmlAreaSeach !!}</div>
                     </div>
                 </div>
@@ -32,7 +34,7 @@
             </div>
         </div>
     </div>
-    
+
     @if (count($items) > 0)
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
