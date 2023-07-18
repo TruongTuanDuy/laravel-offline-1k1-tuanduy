@@ -22,25 +22,26 @@
                 @if (count($items) > 0)
                     @foreach ($items as $key => $val)
                         @php
-                            $index           = $key + 1;
-                            $class           = ($index % 2 == 0) ? "even" : "odd";
-                            $id              = $val['id'];
-                            $source          = $val['source'];
-                            $ordering        = $val['ordering'];
-                            $name            = Hightlight::show($val['name'], $params['search'], 'name');
-                            $link            = Hightlight::show($val['link'], $params['search'], 'link');
-                            $status          = Template::showItemStatus($controllerName, $id, $val['status']); ;
-                            $createdHistory  = Template::showItemHistory($val['created_by'], $val['created']);
+                            $index = $key + 1;
+                            $class = $index % 2 == 0 ? 'even' : 'odd';
+                            $id = $val['id'];
+                            $source = $val['source'];
+                            // $ordering        = $val['ordering'];
+                            $ordering = Template::showItemOrdering($controllerName, $id, $val['ordering']);
+                            $name = Hightlight::show($val['name'], $params['search'], 'name');
+                            $link = Hightlight::show($val['link'], $params['search'], 'link');
+                            $status = Template::showItemStatus($controllerName, $id, $val['status']);
+                            $createdHistory = Template::showItemHistory($val['created_by'], $val['created']);
                             $modifiedHistory = Template::showItemHistory($val['modified_by'], $val['modified']);
-                            $listBtnAction   = Template::showButtonAction($controllerName, $id);
+                            $listBtnAction = Template::showButtonAction($controllerName, $id);
                         @endphp
 
                         <tr class="{{ $class }} pointer">
-                            <td >{{ $index }}</td>
-                            <td >{{ $name }}</td>
-                            <td >{{ $link }}</td>
-                            <td >{{ $ordering }}</td>
-                            <td >{{ $source }}</td>
+                            <td>{{ $index }}</td>
+                            <td>{{ $name }}</td>
+                            <td>{{ $link }}</td>
+                            <td>{!! $ordering !!}</td>
+                            <td>{{ $source }}</td>
                             <td>{!! $status !!}</td>
                             <td>{!! $createdHistory !!}</td>
                             <td>{!! $modifiedHistory !!}</td>
@@ -54,4 +55,3 @@
         </table>
     </div>
 </div>
-           

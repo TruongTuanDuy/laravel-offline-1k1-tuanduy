@@ -2,6 +2,7 @@
 
 @php
     $xhtml = null;
+    // dd($params['dashboardItems']);
     foreach ($params['dashboardItems'] as $key => $value) {
         if (count($value['itemsStatusCount']) > 0) {
             array_unshift($value['itemsStatusCount'], [
@@ -9,17 +10,22 @@
                 'count' => array_sum(array_column($value['itemsStatusCount'], 'count')),
             ]);
         }
+    
+        $link = route($key);
         $xhtml .= sprintf(
             '
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <div class="tile-stats">
-                    <div class="icon"><i class="%s"></i></div>
-                    <div class="count">%s</div>
-                    <h3>%s</h3>
-                    <p>Lorem ipsum psdea itgum rixt.</p>
+            <a href="%s">
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon"><i class="%s"></i></div>
+                        <div class="count">%s</div>
+                        <h3>%s</h3>
+                        <p>Lorem ipsum psdea itgum rixt.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         ',
+            $link,
             $value['icon'],
             $value['itemsStatusCount'][0]['count'],
             $value['name'],
@@ -29,7 +35,7 @@
 
 @section('content')
     <div class="page-header zvn-page-header clearfix">
-        <div class="zvn-page-header-title">
+        <div style="display: block">
             <h3>Dashboard</h3>
             <br>
             <div class="row top_tiles">
@@ -41,8 +47,8 @@
                         <h3>Slider Manager</h3>
                         <p>Lorem ipsum psdea itgum rixt.</p>
                     </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                </div> --}}
+                {{-- <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-pencil-square"></i></div>
                         <div class="count">179</div>

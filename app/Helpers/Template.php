@@ -49,14 +49,15 @@ class Template
         $categoryModel  = new CategoryModel();
         $itemsCategory  = $categoryModel->listItems(null, ['task' => 'admin-list-items-in-selectbox']);
         $itemsCategory['default'] = "- All Category -";
-        sort($itemsCategory);
-
+        $itemsCategory = ['default' => "- All Category -"] + $itemsCategory;
+        // sort($itemsCategory);
+        // dd($itemsCategory);
         $paramsFilter = in_array($paramsFilter, $itemsCategory) ? $paramsFilter : '- All Category -';
 
         $xhtmlField = null;
         foreach ($itemsCategory as $key => $value) {
-            $link = route($controllerName) . "?filter_category=" .  $value;
-            $xhtmlField .= sprintf('<li><a href="%s" class="select-field-category" data-field="%s">%s</a></li>', $link, $key, $value);
+            $link = route($controllerName) . "?filter_category=" .  $key;
+            $xhtmlField .= sprintf('<li><a href="%s" class="select-field-category" data-field="%s" data-value="%s">%s</a></li>', $link, $key, $key, $value);
         }
 
         $xhtml = sprintf('
@@ -106,6 +107,28 @@ class Template
                     <button id="btn-search" type="button" class="btn btn-primary">Tìm kiếm</button>
                 </span>
             </div>', $tmplField[$searchField]['name'], $xhtmlField, $paramsSearch['value'], $searchField);
+        return $xhtml;
+    }
+
+    public static function showItemOrdering($controllerName, $id, $orderingValue)
+    {
+        $xhtml = null;
+        $xhtml = sprintf('<input type="text" name="ordering_value" value="%s" class="form-control">', $orderingValue);
+
+        // $tmplStatus = Config::get('zvn.template.status');
+        // $statusValue        = array_key_exists($statusValue, $tmplStatus) ? $statusValue : 'default';
+        // $currentTemplateStatus = $tmplStatus[$statusValue];
+        // $link          = route($controllerName . '/status', ['status' => $statusValue, 'id' => $id]);
+
+
+
+        // $xhtml = sprintf(
+        //     '<button data-url="%s" type="button" data-class="%s" class="btn btn-round %s status-ajax">%s</button>',
+        //     $link,
+        //     $currentTemplateStatus['class'],
+        //     $currentTemplateStatus['class'],
+        //     $currentTemplateStatus['name']
+        // );
         return $xhtml;
     }
 

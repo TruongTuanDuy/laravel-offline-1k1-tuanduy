@@ -15,7 +15,6 @@ class DashboardModel extends AdminModel
 
     public function listItems($params = null, $options = null)
     {
-
         $result = null;
 
         if ($options['task'] == "admin-list-items") {

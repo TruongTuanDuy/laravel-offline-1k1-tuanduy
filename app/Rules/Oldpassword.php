@@ -4,9 +4,11 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-class OldPassword implements Rule
+class Oldpassword implements Rule
 {
+
     protected $password;
     /**
      * Create a new rule instance.
@@ -27,8 +29,8 @@ class OldPassword implements Rule
      */
     public function passes($attribute, $value)
     {
-        // return Hash::check($value, $this->password);
-        return (md5($value) === $this->password);
+        // return Hash::check($value, auth()->user()->password);
+        return (md5($value) == $this->password);
     }
 
     /**

@@ -8,7 +8,7 @@
     $levelValue = ['default' => 'Select value', 'admin' => config('zvn.template.level.admin.name'), 'member' => config('zvn.template.level.member.name')];
     
     $inputHiddenID = Form::hidden('id', @$item['id']);
-    $inputHiddenTask = Form::hidden('task', 'change-level');
+    $inputHiddenTask = Form::hidden('task_change_level', 'change-level');
     
     $elements = [
         [

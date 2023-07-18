@@ -30,7 +30,7 @@ class ArticleModel extends AdminModel
             }
 
             if ($params['filter']['category'] !== "- All Category -") {
-                $query->where('c.name', '=', $params['filter']['category']);
+                $query->where('c.id', '=', $params['filter']['category']);
             }
 
             if ($params['search']['value'] !== "") {

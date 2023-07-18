@@ -12,7 +12,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         let field = $(this).data("field");
-        let fieldName = $(this).html();
+        let fieldName = $(this).data('value');
         $("button.btn-active-field-category").html(
             fieldName + ' <span class="caret"></span>'
         );

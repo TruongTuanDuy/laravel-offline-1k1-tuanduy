@@ -11,7 +11,7 @@ use App\Models\DashboardModel as MainModel;
 
 class DashboardController extends Controller
 {
-    private $pathViewController = 'admin.pages.dashboard.';  // slider
+    private $pathViewController = 'admin.pages.dashboard.';
     private $controllerName     = 'dashboard';
     private $params             = [];
     private $model;
@@ -28,7 +28,7 @@ class DashboardController extends Controller
 
         $this->params['dashboardItems'] = $dashboardItems;
         $this->params = $this->model->countDashboardItems($this->params, ['task' => 'admin-count-items-group-by-status']);
-
+        // dd($this->params);
         return view($this->pathViewController .  'index', [
             'params'        => $this->params,
         ]);

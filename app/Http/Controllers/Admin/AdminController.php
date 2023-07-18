@@ -7,21 +7,14 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    // private $pathViewController = 'admin.pages.slider.';  // slider
-    // private $controllerName     = 'slider';
+    protected $pathViewController = '';
+    protected $controllerName     = '';
+    protected $params             = [];
+    protected $model;
 
-
-    protected $pathViewController;
-    protected $controllerName;
-    private $params = [];
-    private $model;
-
-    public function __construct($pathViewController, $controllerName)
+    public function __construct()
     {
-        $this->pathViewController = $pathViewController;
-        $this->controllerName = $controllerName;
-        $this->model = new MainModel();
-        $this->params["pagination"]["totalItemsPerPage"] = 5;
+        $this->params["pagination"]["totalItemsPerPage"] = 3;
         view()->share('controllerName', $this->controllerName);
     }
 
@@ -52,23 +45,6 @@ class AdminController extends Controller
         return view($this->pathViewController .  'form', [
             'item'        => $item
         ]);
-    }
-
-    public function save(MainRequest $request)
-    {
-        if ($request->method() == 'POST') {
-            $params = $request->all();
-
-            $task   = "add-item";
-            $notify = "Thêm phần tử thành công!";
-
-            if ($params['id'] !== null) {
-                $task   = "edit-item";
-                $notify = "Cập nhật phần tử thành công!";
-            }
-            $this->model->saveItem($params, ['task' => $task]);
-            return redirect()->route($this->controllerName)->with("zvn_notify", $notify);
-        }
     }
 
     public function status(Request $request)

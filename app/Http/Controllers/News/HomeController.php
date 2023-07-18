@@ -47,7 +47,7 @@ class HomeController extends Controller
     public function notFound(Request $request)
     {
         return view($this->pathViewController .  'not-found', [
-            'params'        => $this->params,
+            // 'params'        => $this->params,
         ]);
     }
 }

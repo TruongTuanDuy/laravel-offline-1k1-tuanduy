@@ -6,13 +6,9 @@
     $formLabelAttr = config('zvn.template.form_label_edit');
     
     $inputHiddenID = Form::hidden('id', @$item['id']);
-    $inputHiddenTask = Form::hidden('task', 'change-password');
+    $inputHiddenTask = Form::hidden('task_change_password', 'change-password');
     
     $elements = [
-        [
-            'label' => Form::label('current_password', 'Current Password', $formLabelAttr),
-            'element' => Form::password('current_password', $formInputAttr),
-        ],
         [
             'label' => Form::label('new_password', 'New Password', $formLabelAttr),
             'element' => Form::password('new_password', $formInputAttr),
