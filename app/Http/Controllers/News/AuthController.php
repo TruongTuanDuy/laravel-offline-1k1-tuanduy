@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\News;
+
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;    
+use Illuminate\Http\Request;
 use App\Http\Requests\AuthLoginRequest as MainRequest;
 use App\Models\UserModel;
 
@@ -19,15 +20,14 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {   
+    {
         return view($this->pathViewController . 'login');
     }
 
     // middelware
-    
 
     public function postLogin(MainRequest $request)
-    {   
+    {
         if ($request->method() == 'POST') {
             $params = $request->all();
 
@@ -43,10 +43,8 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request)
-    {   
-        if($request->session()->has('userInfo')) $request->session()->pull('userInfo');
+    {
+        if ($request->session()->has('userInfo')) $request->session()->pull('userInfo');
         return redirect()->route('home');
     }
-
- 
 }
