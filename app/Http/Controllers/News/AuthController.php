@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthLoginRequest as MainRequest;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -21,6 +22,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        Session::put('url.intended', url()->previous());
+        // dd($request->session()->get('url.intended'));
         return view($this->pathViewController . 'login');
     }
 
@@ -34,11 +37,13 @@ class AuthController extends Controller
             $userModel = new UserModel();
             $userInfo = $userModel->getItem($params, ['task' => 'auth-login']);
 
-            if (!$userInfo)
+            if (!$userInfo) {
                 return redirect()->route($this->controllerName . '/login')->with('news_notify', 'Tài khoản hoặc mật khẩu không chính xác!');
+            }
 
             $request->session()->put('userInfo', $userInfo);
-            return redirect()->route('home');
+            // return redirect()->route('home');
+            return redirect()->intended('home');
         }
     }
 
