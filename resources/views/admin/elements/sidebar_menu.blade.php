@@ -9,7 +9,7 @@
     </div>
 </div>
 <!-- /menu profile quick info -->
-<br/>
+<br />
 <!-- sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
@@ -21,6 +21,7 @@
             <li><a href="{{ route('article') }}"><i class="fa fa-newspaper-o"></i> Article</a></li>
             <li><a href="{{ route('slider') }}"><i class="fa fa-sliders"></i> Silders</a></li>
             <li><a href="{{ route('rss') }}"><i class="fa fa-newspaper-o"></i> Rss</a></li>
+            <li><a href="{{ route('upload') }}"><i class="fa fa-upload"></i> Upload</a></li>
         </ul>
     </div>
 </div>

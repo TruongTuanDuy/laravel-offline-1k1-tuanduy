@@ -6,4 +6,6 @@ $(document).ready(function () {
     $.get($('#box-coin').data('url'), function (data) {
         $('#box-coin').html(data);
     }, 'html');
+
+    $('[data-fancybox]').fancybox();
 });

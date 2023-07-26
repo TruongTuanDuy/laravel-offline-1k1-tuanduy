@@ -30,25 +30,27 @@ class RssController extends Controller
         $rssTime = time();
         // $request->session()->flush();
         // $request->session()->forget('rss_time');
-        dd($request->session()->get('rss_time'));
-
+        // dd($request->session()->get('rss_time'));
         if ((DB::table('rss_article'))->count() == 0) {
-            dd('0');
+            echo ('table null');
+            dd($request->session()->get('rss_time'));
             $itemsRss   = $rssModel->listItems(null, ['task'   => 'news-list-items']);
             $dataRss = Feed::read($itemsRss);
             $itemsRss   = $rssModel->saveRss($dataRss, ['task'   => 'add-rss']);
         } elseif ($request->session()->has('rss_time')) {
-            dd($request->session()->get('rss_time'));
             if (($request->session()->get('rss_time') + 3600 < $rssTime)) {
-                dd('1.1.1');
+                echo ('table NOT null, NOT first, >3600s');
+                dd($request->session()->get('rss_time'));
+
                 $itemsRss   = $rssModel->listItems(null, ['task'   => 'news-list-items']);
                 $dataRss = Feed::read($itemsRss);
                 $itemsRss   = $rssModel->saveRss($dataRss, ['task'   => 'add-rss']);
             }
-            dd('1.1.0');
+            echo ('table NOT null, NOT first, <3600s');
+            dd($request->session()->get('rss_time'));
         };
-
-        dd('1.0');
+        echo ('table NOT null, first');
+        dd($request->session()->get('rss_time'));
         $request->session()->put('rss_time', $rssTime);
         $data   = $rssModel->listRss(null, ['task'   => 'news-list-rss']);
         return view($this->pathViewController .  'index', [
