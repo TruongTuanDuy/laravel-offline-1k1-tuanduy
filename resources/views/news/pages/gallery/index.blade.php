@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 @foreach ($items as $item)
                     @php
-                        $image = 'images/files/' . basename($item);
+                        $image = config('zvn.path.gallery') . basename($item);
                     @endphp
                     <div style="display:inline-block; left: 0px; top: 0px; margin: 25px">
                         <a data-fancybox="gallery" href="{{ asset($image) }}"><img src="{{ asset($image) }}"

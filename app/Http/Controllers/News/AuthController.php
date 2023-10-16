@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    private $pathViewController = 'news.pages.auth.';  // slider
+    private $pathViewController = 'news.pages.auth.';
     private $controllerName     = 'auth';
     private $params             = [];
     private $model;
@@ -22,7 +22,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        Session::put('url.intended', url()->previous());
+        // dd(str_contains('login', url()->previous()));
+        if (!str_contains(url()->previous(), 'login')) {
+            // dd(url()->previous());
+            Session::put('url.intended', url()->previous());
+        }
         // dd($request->session()->get('url.intended'));
         return view($this->pathViewController . 'login');
     }
@@ -40,10 +44,10 @@ class AuthController extends Controller
             if (!$userInfo) {
                 return redirect()->route($this->controllerName . '/login')->with('news_notify', 'Tài khoản hoặc mật khẩu không chính xác!');
             }
-
+            // dd($request->session()->get('url.intended'));
             $request->session()->put('userInfo', $userInfo);
             // return redirect()->route('home');
-            return redirect()->intended('home');
+            return redirect($request->session()->get('url.intended'));
         }
     }
 

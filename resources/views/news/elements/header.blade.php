@@ -1,7 +1,7 @@
 @php
     // use App\Helpers\URL;
     
-    $query = DB::table('menus')
+    $query = DB::table('menu')
         ->select('id', 'name', 'url', 'type_open', 'type')
         ->where('status', '=', 'active')
         ->orderBy('ordering', 'asc');

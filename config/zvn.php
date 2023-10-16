@@ -20,6 +20,9 @@ return [
         'form_input' => [
             'class' => 'form-control col-md-6 col-xs-12'
         ],
+        'form_input_tags' => [
+            'class' => 'form-control col-md-6 col-xs-12 tags'
+        ],
         'form_label' => [
             'class' => 'control-label col-md-3 col-sm-3 col-xs-12'
         ],
@@ -76,6 +79,11 @@ return [
         ]
 
     ],
+
+    'path' => [
+        'gallery' => 'images/files/'
+    ],
+
     'config' => [
         'search' => [
             'default'   => ['all', 'id', 'fullname'],

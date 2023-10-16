@@ -101,7 +101,6 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         Route::get('change-status-{status}/{id}',   ['as' => $controllerName . '/status',      'uses' => $controller . 'status'])->where('id', '[0-9]+');
     });
 
-
     // ============================== UPLOAD ==============================
     $prefix         = 'upload';
     $controllerName = 'upload';
@@ -109,12 +108,21 @@ Route::group(['prefix' => $prefixAdmin, 'namespace' => 'Admin', 'middleware' => 
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('/',                             ['as' => $controllerName,                  'uses' => $controller . 'index']);
     });
+
+    // ============================== SETTING ==============================
+    $prefix         = 'setting';
+    $controllerName = 'setting';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/',         ['as' => $controllerName,               'uses' => $controller . 'index']);
+        Route::post('/save',  ['as' => $controllerName . '/save',  'uses' => $controller . 'save']);
+        Route::post('/general',  ['as' => $controllerName . '/general',  'uses' => $controller . 'general']);
+        Route::post('/social',   ['as' => $controllerName . '/social',   'uses' => $controller . 'social']);
+        Route::post('/email-account',    ['as' => $controllerName . '/email_account',    'uses' => $controller . 'emailAccount']);
+        Route::post('/email-bcc',    ['as' => $controllerName . '/email_bcc',    'uses' => $controller . 'emailBcc']);
+    });
 });
 
-// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-//     \UniSharp\LaravelFilemanager\Lfm::routes();
-// });
-
-Route::group(['prefix' => 'laravel-filemanager'], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['permission.admin', 'web']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

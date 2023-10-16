@@ -22,6 +22,14 @@
             <li><a href="{{ route('slider') }}"><i class="fa fa-sliders"></i> Silders</a></li>
             <li><a href="{{ route('rss') }}"><i class="fa fa-newspaper-o"></i> Rss</a></li>
             <li><a href="{{ route('upload') }}"><i class="fa fa-upload"></i> Upload</a></li>
+
+            <li><a><i class="fa fa-cog"></i> Setting <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('setting', ['type' => 'general']) }}">General</a></li>
+                    <li><a href="{{ route('setting', ['type' => 'email']) }}">Email</a></li>
+                    <li><a href="{{ route('setting', ['type' => 'social']) }}">Social</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

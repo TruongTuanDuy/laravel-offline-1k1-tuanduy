@@ -16,7 +16,7 @@ return [
      */
 
     'use_package_routes'       => true,
-
+    // 'middleware' => 'admin',
     /*
     |--------------------------------------------------------------------------
     | Shared folder / Private folder
@@ -47,7 +47,7 @@ return [
 
     'folder_categories'        => [
         'file'  => [
-            'folder_name'  => 'files',
+            'folder_name'  => '',
             'startup_view' => 'list',
             'max_size'     => 50000, // size in KB
             'thumb' => true,

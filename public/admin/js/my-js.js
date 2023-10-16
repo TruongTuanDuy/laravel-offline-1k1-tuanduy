@@ -1,3 +1,6 @@
+// import Tagify from '@yaireo/tagify'
+// import './styles.scss' // imports tagify SCSS file from within
+
 $(document).ready(function () {
     let $btnSearch = $("button#btn-search");
     let $btnClearSearch = $("button#btn-clear-search");
@@ -7,6 +10,17 @@ $(document).ready(function () {
     let $inputSearchValue = $("input[name  = search_value]");
     let $selectChangeAttr = $("select[name = select_change_attr]");
     let $selectChangeCategory = $("select[name = select_change_category]");
+
+    // The DOM element you wish to replace with Tagify
+    let inputFacebook = document.querySelector('input[name=facebook]');
+    let inputYoutube = document.querySelector('input[name=youtube]');
+    let inputGoogle = document.querySelector('input[name=google]');
+    let inputBcc = document.querySelector('textarea[name=email_bcc]');
+    // initialize Tagify on the above input node reference
+    new Tagify(inputFacebook);
+    new Tagify(inputYoutube);
+    new Tagify(inputGoogle);
+    new Tagify(inputBcc);
 
     $("a.select-field-category").click(function (e) {
         e.preventDefault();
@@ -179,4 +193,28 @@ $(document).ready(function () {
             },
         });
     });
+
+    // var route_prefix = "/laravel-filemanager";
+    // $('#lfm').filemanager('image', { prefix: route_prefix });
+
+    $('#lfm').filemanager('image');
+
+    // $('.tags').tagsInput({
+    //     // 'autocomplete_url': url_to_autocomplete_api,
+    //     // 'autocomplete': { option: value, option: value },
+    //     // 'height': '100px',
+    //     // 'width': '300px',
+    //     // 'interactive': true,
+    //     // 'defaultText': 'add a tag',
+    //     // 'onAddTag': callback_function,
+    //     // 'onRemoveTag': callback_function,
+    //     // 'onChange': callback_function,
+    //     // 'delimiter': [',', ';'],   // Or a string with a single delimiter. Ex: ';'
+    //     // 'removeWithBackspace': true,
+    //     // 'minChars': 0,
+    //     // 'maxChars': 0, // if not provided there is no limit
+    //     // 'placeholderColor': '#666666'
+    // });
+
+
 });

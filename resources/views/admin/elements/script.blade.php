@@ -11,7 +11,6 @@
 <!-- iCheck -->
 <script src="{{ asset('admin/asset/iCheck/icheck.min.js') }}"></script>
 <script src="{{ asset('admin/js/ckeditor/ckeditor.js') }}"></script>
-<!-- Custom Theme Scripts -->
 
 {{-- <script src="{{ asset('gentelella-1.4.0/documentation/js/bootstrap.min.js') }}"></script> --}}
 {{-- <script src="{{ asset('gentelella-1.4.0/documentation/js/jquery.min.js') }}"></script> --}}
@@ -20,5 +19,17 @@
 {{-- <script src="{{ asset('gentelella-1.4.0/production/js/moment/moment.min.js') }}"></script> --}}
 
 <script src="{{ asset('admin/js/notify.min.js') }}"></script>
+
+{{-- <script src="{{ asset('admin/asset/jquery.tagsinput/jquery.tagsinput.min.js') }}"></script> --}}
+
+{{-- <script src="{{ asset('admin/asset/tagify-master') }}"></script>
+<script src="{{ asset('admin/asset/tagify-master/dist/tagify.polyfills.min.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+
+<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+
+<!-- Custom Theme Scripts -->
+
 <script src="{{ asset('admin/js/custom.min.js') }}"></script>
 <script src="{{ asset('admin/js/my-js.js') }}"></script>

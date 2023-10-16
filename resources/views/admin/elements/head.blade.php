@@ -26,6 +26,11 @@
 <link href="{{ asset('gentelella-1.4.0/documentation/font/css/font-awesome.css') }}" rel="stylesheet">
 <link href="{{ asset('gentelella-1.4.0/documentation/font/css/font-awesome.min.css') }}" rel="stylesheet"> --}}
 
+{{-- <link href="{{ asset('admin/asset/jquery.tagsinput/jquery.tagsinput.min.css') }}" rel="stylesheet"> --}}
+
+{{-- <link href="{{ asset('admin/asset/tagify-master/dist/tagify.css') }}" rel="stylesheet"> --}}
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
 <!-- Custom Theme Style -->
 <link href="{{ asset('admin/css/custom.min.css') }}" rel="stylesheet">
 <!-- Custom Theme Style -->

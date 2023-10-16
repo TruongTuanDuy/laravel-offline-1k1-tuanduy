@@ -84,11 +84,20 @@ Route::group(['prefix' => $prefixNews, 'namespace' => 'News', 'middleware' => ['
         Route::get('/get-coin',                             ['as' => "$controllerName/get-coin",                  'uses' => $controller . 'getCoin']);
     });
 
-    // ====================== DISPLAY IMAGES ========================
+    // ====================== GALLERY UPLOAD ========================
     $prefix         = '';
-    $controllerName = 'image';
+    $controllerName = 'gallery';
     Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
         $controller = ucfirst($controllerName)  . 'Controller@';
         Route::get('/hinh-anh', ['as' => "$controllerName/index", 'uses' => $controller . 'index']);
+    });
+
+    // ====================== CONTACT ========================
+    $prefix         = 'lien-he';
+    $controllerName = 'contact';
+    Route::group(['prefix' =>  $prefix], function () use ($controllerName) {
+        $controller = ucfirst($controllerName)  . 'Controller@';
+        Route::get('/', ['as' => "$controllerName/index", 'uses' => $controller . 'index']);
+        Route::post('/post-contact', ['as' => "$controllerName/post_contact", 'uses' => $controller . 'postContact']);
     });
 });
